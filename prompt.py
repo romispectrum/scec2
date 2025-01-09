@@ -19,6 +19,4 @@ Then, produce the final JSON accordingly.
 
 User text: {user_text}
 Current timestamp: {timestamp}
-
-{format_instructions}
 """
