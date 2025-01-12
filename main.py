@@ -4,7 +4,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 
-from parser import generate_event_from_text_input
+from parser import generate_event_from_text_input, FileSavePopup
 
 
 class MyApp(App):
@@ -35,10 +35,17 @@ class MyApp(App):
         return layout
 
     def on_button_press(self, instance):
-        # Get text from the input and display it in the label
+        # Get text from the input and generate event
         user_input = self.text_input.text
-        response = generate_event_from_text_input(user_input)
-        self.result_label.text = f"LLM response: {response}"
+
+        try:
+            response = generate_event_from_text_input(user_input)
+            if isinstance(response, FileSavePopup):
+                response.open()  # Open the file save popup
+            else:
+                self.result_label.text = f"LLM response: {response}"
+        except Exception as e:
+            self.result_label.text = f"Error: {str(e)}"
 
 
 if __name__ == "__main__":
