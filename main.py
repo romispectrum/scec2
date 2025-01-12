@@ -5,13 +5,9 @@ from view import MainView
 
 class MyApp(App):
     def build(self):
-        # Initialize the controller first, passing a reference to the view
-        view = MainView(controller=None)  # Temporary None to avoid circular dependency
+        view = MainView(controller=None)
         controller = EventController(view=view)
-
-        # Now that the controller is initialized, update the view's controller reference
         view.controller = controller
-
         return view
 
 
