@@ -38,10 +38,6 @@ class EventController:
             return None
 
     def process_event_data(self, event_data):
-        """
-        Create a Calendar object from event_data and return
-        its string representation. Let the View handle the popup.
-        """
         try:
             event = create_ics_event(event_data.properties)
             calendar = Calendar()

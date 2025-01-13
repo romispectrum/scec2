@@ -1,9 +1,10 @@
 from kivy.app import App
+
 from controller import EventController
 from view import MainView
 
 
-class MyApp(App):
+class ScecApp(App):
     def build(self):
         view = MainView(controller=None)
         controller = EventController(view=view)
@@ -12,4 +13,4 @@ class MyApp(App):
 
 
 if __name__ == "__main__":
-    MyApp().run()
+    ScecApp().run()

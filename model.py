@@ -35,9 +35,6 @@ class EventModel(BaseModel):
 
 
 def create_ics_event(event_data: dict) -> Event:
-    """
-    Create an .ics event from a JSON dictionary.
-    """
     event = Event()
     event.uid = event_data.get("UID")
     event.name = event_data.get("SUMMARY")
@@ -56,9 +53,6 @@ def create_ics_event(event_data: dict) -> Event:
 
 
 def save_event_to_temp_file(calendar: Calendar) -> str:
-    """
-    Save the calendar containing the event to a temporary .ics file.
-    """
     with tempfile.NamedTemporaryFile(suffix=".ics", delete=False, mode='w', encoding='utf-8') as tmp:
         tmp.write(str(calendar))
         tmp.flush()
