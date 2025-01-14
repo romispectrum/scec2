@@ -1,8 +1,6 @@
-import os
-import tempfile
 from datetime import datetime, timezone
 
-from ics import Calendar, Event
+from ics import Event
 from pydantic import BaseModel, Field
 
 
@@ -50,25 +48,3 @@ def create_ics_event(event_data: dict) -> Event:
         event.created = datetime.fromisoformat(event_data["DTSTAMP"]).astimezone(timezone.utc)
 
     return event
-
-
-def save_event_to_temp_file(calendar: Calendar) -> str:
-    with tempfile.NamedTemporaryFile(suffix=".ics", delete=False, mode='w', encoding='utf-8') as tmp:
-        tmp.write(str(calendar))
-        tmp.flush()
-        return tmp.name
-
-
-def save_event_to_downloads(calendar: Calendar, file_name) -> str:
-    """
-    Save the calendar containing the event to the macOS (or Unix-like) Downloads folder
-    and return the full path to the created file.
-    """
-    downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
-    if not file_name.endswith(".ics"):
-        file_name += ".ics"
-
-    full_path = os.path.join(downloads_folder, file_name)
-    with open(full_path, "w", encoding="utf-8") as file:
-        file.write(str(calendar))
-    return full_path

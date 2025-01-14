@@ -1,8 +1,11 @@
 import os
 
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.textinput import TextInput
 
 
 class FileSavePopupWithName(Popup):
@@ -100,12 +103,6 @@ class FileSavePopupWithName(Popup):
             self.dismiss()
         except Exception as e:
             self.show_error_message(f"Error saving file:\n{e}")
-
-
-# Main application view
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
 
 
 class MainView(BoxLayout):
